@@ -1,0 +1,59 @@
+{
+  "name": "big-venn",
+  "author": "Javier Rizzo",
+  "version": "1.0.0",
+  "keywords": [
+    "venn",
+    "diagram",
+    "math",
+    "geometry",
+    "pebble",
+    "smartwatch",
+    "watchface",
+    "colorful",
+    "circles"
+  ],
+  "private": true,
+  "dependencies": {
+    "pebble-clay": "^1.0.4"
+  },
+  "pebble": {
+    "displayName": "Big Venn",
+    "uuid": "07ae2812-d826-4154-b886-91d775bad2b4",
+    "sdkVersion": "3",
+    "enableMultiJS": true,
+    "targetPlatforms": [
+      "aplite",
+      "basalt",
+      "chalk",
+      "diorite",
+      "emery"
+    ],
+    "watchapp": {
+      "watchface": true
+    },
+    "messageKeys": [
+      "SecondsHand",
+      "ForceMonochrome",
+      "BiggerCircles",
+      "HoursColor",
+      "MinutesColor",
+      "SecondsColor",
+      "BackgroundColor",
+      "BorderColor"
+    ],
+    "resources": {
+      "media": [
+        {
+          "menuIcon": true,
+          "type": "png",
+          "name": "IMAGE_MENU_ICON",
+          "file": "images/icon.png"
+        }
+      ]
+    },
+    "capabilities": [
+      "configurable"
+    ]
+  }
+}
