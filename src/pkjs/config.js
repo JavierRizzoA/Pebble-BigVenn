@@ -43,19 +43,21 @@ module.exports = [
         "label": "Force Monochrome",
         "description": "Forces the monochrome style on color-capable watches.",
         "defaultValue": false,
-        "messageKey": "ForceMonochrome"
+        "messageKey": "ForceMonochrome",
+        "capabilities": [ "COLOR" ]
       },
       {
         "type": "toggle",
         "label": "Bigger Circles",
         "description": "If the seconds hand is hidden, this setting will make the hours and minutes hands bigger.",
-        "defaultValue": false,
+        "defaultValue": true,
         "messageKey": "BiggerCircles"
       }
     ]
   },
   {
     "type": "section",
+    "capabilities": [ "COLOR" ],
     "items": [
       {
         "type": "heading",
@@ -95,6 +97,50 @@ module.exports = [
         "label": "Border Color",
         "description": "Color for the border at the center of the hands.",
         "defaultValue": "000000"
+      }
+    ]
+  },
+  {
+    "type": "section",
+    "items": [
+      {
+        "type": "heading",
+        "capabilities": [ "BW" ],
+        "defaultValue": "Colors"
+      },
+      {
+        "type": "heading",
+        "capabilities": [ "COLOR" ],
+        "defaultValue": "Monochrome Colors"
+      },
+      {
+        "type": "text",
+        "capabilities": [ "COLOR" ],
+        "defaultValue": "These settings are only used if 'Force Monochrome' is on."
+      },
+      {
+        "type": "color",
+        "messageKey": "BWCirclesColor",
+        "label": "Circles Color",
+        "description": "Color for the circles.",
+        "defaultValue": "000000",
+        "layout": "BLACK_WHITE"
+      },
+      {
+        "type": "color",
+        "messageKey": "BWBackgroundColor",
+        "label": "Background Color",
+        "description": "Color for the background.",
+        "defaultValue": "FFFFFF",
+        "layout": "BLACK_WHITE"
+      },
+      {
+        "type": "color",
+        "messageKey": "BWBorderColor",
+        "label": "Border Color",
+        "description": "Color for the circles border",
+        "defaultValue": "FFFFFF",
+        "layout": "BLACK_WHITE"
       }
     ]
   },

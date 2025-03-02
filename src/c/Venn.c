@@ -269,11 +269,11 @@ static void canvas_update_proc(Layer *layer, GContext *ctx) {
     graphics_context_set_stroke_width(ctx, 1);
     graphics_context_set_antialiased(ctx, false);
 
-    graphics_context_set_fill_color(ctx, GColorWhite);
+    graphics_context_set_fill_color(ctx, settings.BWBackgroundColor);
     graphics_fill_rect(ctx, bounds, 0, GCornersAll);
 
-    graphics_context_set_stroke_color(ctx, GColorWhite);
-    graphics_context_set_fill_color(ctx, GColorBlack);
+    graphics_context_set_stroke_color(ctx, settings.BWBorderColor);
+    graphics_context_set_fill_color(ctx, settings.BWCirclesColor);
 
     if (settings.SecondsHand) {
       graphics_fill_circle(ctx, seconds_center, seconds_radius);
@@ -287,13 +287,21 @@ static void canvas_update_proc(Layer *layer, GContext *ctx) {
     graphics_draw_circle(ctx, minutes_center, minutes_radius);
     graphics_draw_circle(ctx, hours_center, hours_radius);
 
-    graphics_context_set_fill_color(ctx, GColorWhite);
+    graphics_context_set_fill_color(ctx, settings.BWBackgroundColor);
     if (settings.SecondsHand) {
       graphics_fill_circle(ctx, seconds_dial_center, DIAL_RADIUS);
     }
     graphics_fill_circle(ctx, minutes_dial_center, DIAL_RADIUS);
     graphics_fill_circle(ctx, hours_dial_center, DIAL_RADIUS);
+
+    if (settings.SecondsHand) {
+      graphics_draw_circle(ctx, seconds_dial_center, DIAL_RADIUS);
+    }
+    graphics_draw_circle(ctx, minutes_dial_center, DIAL_RADIUS);
+    graphics_draw_circle(ctx, hours_dial_center, DIAL_RADIUS);
+
     graphics_fill_circle(ctx, GPoint(bounds.size.w / 2, bounds.size.h / 2), CENTER_RADIUS);
+    graphics_draw_circle(ctx, GPoint(bounds.size.w / 2, bounds.size.h / 2), CENTER_RADIUS);
   }
 }
 
@@ -335,6 +343,9 @@ static void prv_default_settings(void) {
   settings.SecondsColor = GColorFolly;
   settings.BackgroundColor = GColorWhite;
   settings.BorderColor = GColorBlack;
+  settings.BWBackgroundColor = GColorWhite;
+  settings.BWCirclesColor = GColorBlack;
+  settings.BWBorderColor = GColorWhite;
 }
 
 // Loads settings from persistent storage.
@@ -357,6 +368,9 @@ static void prv_inbox_received_handler(DictionaryIterator *iter, void *context) 
   Tuple *seconds_color_t = dict_find(iter, MESSAGE_KEY_SecondsColor);
   Tuple *background_color_t = dict_find(iter, MESSAGE_KEY_BackgroundColor);
   Tuple *border_color_t = dict_find(iter, MESSAGE_KEY_BorderColor);
+  Tuple *bw_background_color_t = dict_find(iter, MESSAGE_KEY_BWBackgroundColor);
+  Tuple *bw_circles_color_t = dict_find(iter, MESSAGE_KEY_BWCirclesColor);
+  Tuple *bw_border_color_t = dict_find(iter, MESSAGE_KEY_BWBorderColor);
 
   if (seconds_hand_t) {
     settings.SecondsHand = seconds_hand_t->value->int32 == 1;
@@ -388,6 +402,15 @@ static void prv_inbox_received_handler(DictionaryIterator *iter, void *context) 
   }
   if (border_color_t) {
     settings.BorderColor = GColorFromHEX(border_color_t->value->int32);
+  }
+  if (bw_background_color_t) {
+    settings.BWBackgroundColor = GColorFromHEX(bw_background_color_t->value->int32);
+  }
+  if (bw_circles_color_t) {
+    settings.BWCirclesColor = GColorFromHEX(bw_circles_color_t->value->int32);
+  }
+  if (bw_border_color_t) {
+    settings.BWBorderColor = GColorFromHEX(bw_border_color_t->value->int32);
   }
 
   set_radiuses();

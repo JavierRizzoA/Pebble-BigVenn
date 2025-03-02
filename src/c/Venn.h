@@ -32,4 +32,7 @@ typedef struct ClaySettings {
   GColor SecondsColor;
   GColor BackgroundColor;
   GColor BorderColor;
+  GColor BWBackgroundColor;
+  GColor BWCirclesColor;
+  GColor BWBorderColor;
 } __attribute__((__packed__)) ClaySettings;
