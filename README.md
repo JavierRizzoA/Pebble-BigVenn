@@ -21,7 +21,7 @@ This watchface was made for the
 
 ## Installing
 
-Get it from the Rebble Store.
+[Get it from the Rebble Store](https://apps.rebble.io/en_US/application/67c39775d2acb30009a3c7ac).
 
 ## Dependencies
 
